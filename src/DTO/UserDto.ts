@@ -1,8 +1,13 @@
-export interface IUser {
-    [x: string]: any;
-    name: string;
-    email: string;
-    password: string;
-    id?: string; // Add id as an optional property
-  }
-  
+interface ParameterDTO {
+	name: string;
+	email: string;
+	password: string;
+	mobileNumer: number;
+}
+
+interface loginDTO {
+	email: string;
+	password: string;
+}
+
+export { loginDTO, ParameterDTO };

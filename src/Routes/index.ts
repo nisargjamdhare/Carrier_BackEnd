@@ -1,11 +1,26 @@
 import { Router } from "express";
-import { UserController } from "../Controller/UserController";
+import UserController from "../Controller/UserController";
+import { injectable } from "inversify";
+@injectable()
+class UserRoutes {
+	private readonly router: Router;
+	private readonly userController: UserController;
 
-const router = Router();
-const userController = new UserController();
+	constructor(userController: UserController) {
+		this.router = Router();
+		this.userController = userController;
 
-// Register API
-router.post("/register", userController.register.bind(userController));
-router.post("/login", (req, res) => userController.login(req, res));
+		this.configureRoutes();
+	}
 
-export default router;
+	private configureRoutes() {
+		this.router.post("/register", (req, res) => this.userController.register(req, res));
+		this.router.post("/login", (req, res) => this.userController.login(req, res));
+	}
+
+	getRouter(): Router {
+		return this.router;
+	}
+}
+
+export default UserRoutes;

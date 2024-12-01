@@ -1,17 +1,26 @@
-import { MongoClient } from "mongodb";
+import mongoose from "mongoose";
 import dotenv from "dotenv";
-
 dotenv.config();
+const CONNECTION_STRING = process.env.CONNECTION_STRING;
 
-const uri = process.env.MONGO_URI || "";
-const client = new MongoClient(uri);
+function dbConnection() {
+	if (!CONNECTION_STRING) {
+		console.error("MongoDB URI is not defined in the environment variables.");
+		process.exit(1);
+	}
+	mongoose.set("bufferTimeoutMS", 30000);
 
-export const connectToDatabase = async () => {
-  try {
-    await client.connect();
-    return client.db("mydatabase");
-  } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
-    throw error;
-  }
-};
+	mongoose
+		.connect(CONNECTION_STRING, {
+			serverSelectionTimeoutMS: 10000,
+			socketTimeoutMS: 30000,
+		})
+		.then(() => {
+			console.log("MongoDB connected");
+		})
+		.catch((err) => {
+			console.error("Error connecting to MongoDB:", err.message);
+		});
+}
+
+export default dbConnection;

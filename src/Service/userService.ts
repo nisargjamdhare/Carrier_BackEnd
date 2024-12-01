@@ -1,47 +1,74 @@
-import { IUserService } from "../Interface/IuserService";
-import { IUser } from "../DTO/UserDto";
-import { MongoClient } from "mongodb";
-import dotenv from "dotenv";
+import { injectable } from "inversify";
+import IUserService from "../Interface/IuserService";
+import { ParameterDTO, loginDTO } from "../DTO/UserDto";
+import { User, UserData } from "../Entity/User";
 
-dotenv.config();
+@injectable()
+class UserService implements IUserService {
+	async registerUser(body: ParameterDTO): Promise<string> {
+		try {
+			// Validate input
+			if (!body) {
+				return "Error: User data is required";
+			}
 
-const uri = process.env.MONGO_URI || "";
-const client = new MongoClient(uri);
+			// Check if the email already exists
+			const existingData = await UserData.findOne({ email: body.email });
+			if (existingData) {
+				return "Error: User with this email already exists";
+			}
 
-export class UserService implements IUserService {
-  async registerUser(user: IUser): Promise<IUser> {
-    try {
-      await client.connect();
-      const db = client.db("mydatabase");
-      const collection = db.collection("users");
+			// Create User instance and initialize it
+			const user = new User(
+				{
+					userName: body.name,
+					email: body.email,
+					mobileNumer: body.mobileNumer,
+					userPassword: body.password,
+				},
+				true,
+				"system",
+				"System"
+			);
 
-      // Insert user into the database
-      const result = await collection.insertOne(user);
+			// Create a new UserData instance from the User object
+			const newUser = new UserData(user);
 
-      // Add the generated ID to the user object
-      return { ...user, id: result.insertedId.toString() };
-    } catch (error) {
-      console.error("Error registering user:", error);
-      throw new Error("Failed to register user");
-    } finally {
-      await client.close();
-    }
-  }
+			// Save user to the database
+			const result = await newUser.save();
 
-  async loginUser(email: string, password: string): Promise<IUser | null> {
-    try {
-      await client.connect();
-      const db = client.db("mydatabase");
-      const collection = db.collection("users");
+			return `User registered successfully with ID: ${result._id}`;
+		} catch (error) {
+			console.error("Error registering user:", error);
+			return "Error: An unexpected error occurred while registering the user";
+		}
+	}
 
-      // Find the user by email and password
-      const user = await collection.findOne<IUser>({ email, password });
-      return user ? { ...user, id: user._id?.toString() } : null;
-    } catch (error) {
-      console.error("Error logging in user:", error);
-      throw new Error("Failed to login user");
-    } finally {
-      await client.close();
-    }
-  }
+	async loginUser(body: loginDTO): Promise<string> {
+		try {
+			// Validate input
+			if (!body || !body.email || !body.password) {
+				return "Error: Email and password are required";
+			}
+
+			// Check if the user exists in the database
+			const user = await UserData.findOne({ email: body.email });
+			if (!user) {
+				return "Error: User does not exist";
+			}
+
+			// Verify the password
+			if (user.userPassword !== body.password) {
+				return "Error: Incorrect password";
+			}
+
+			// Return success message
+			return `Login successful for user: ${user.userName}`;
+		} catch (error) {
+			console.error("Error logging in user:", error);
+			return "Error logging in user";
+		}
+	}
 }
+
+export default UserService;

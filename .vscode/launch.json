@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "command": "npm run dev",
+            "name": "Launch Carriee=r_backend",
+            //"preLaunchTask": "npm: build",
+            "request": "launch",
+            "type": "node-terminal",
+            "sourceMaps": true
+        },
+    ]
+}

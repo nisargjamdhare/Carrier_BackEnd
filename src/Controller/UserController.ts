@@ -1,63 +1,45 @@
 import { Request, Response } from "express";
-import { IUserService } from "../Interface/IuserService";
-import { UserService } from "../Service/userService";
-import { IUser } from "../DTO/UserDto";
+import { injectable } from "inversify";
+import UserService from "../Service/userService";
+@injectable()
+class UserController {
+	private userService: UserService;
 
-export class UserController {
-  private userService: IUserService;
+	constructor(userService: UserService) {
+		this.userService = userService;
+	}
 
-  constructor() {
-    this.userService = new UserService();
-  }
+	async register(req: Request, res: Response): Promise<void> {
+		try {
+			const response = await this.userService.registerUser(req.body);
 
-  async register(req: Request, res: Response): Promise<void> {
-    try {
-      const { name, email, password } = req.body;
+			if (response != null) {
+				res.status(200).json(response);
+			} else {
+				console.error("Data not found");
+				res.status(404).json("Error in Registering USer");
+			}
+		} catch (error: any) {
+			console.error("Error in processing", error);
+			res.status(500).json("Internal Server Error");
+		}
+	}
 
-      // Validate input
-      if (!name || !email || !password) {
-        res.status(400).json({ message: "All fields are required" });
-        return;
-      }
+	async login(req: Request, res: Response): Promise<void> {
+		try {
+			const response = await this.userService.loginUser(req.body);
 
-      // Prepare user object
-      const user: IUser = { name, email, password };
-
-      // Call the service to register the user
-      const newUser = await this.userService.registerUser(user);
-
-      res.status(200).json({
-        message: "User registered successfully",
-        user: newUser,
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async login(req: Request, res: Response): Promise<void> {
-    try {
-      const { email, password } = req.body;
-
-      // Validate input
-      if (!email || !password) {
-        res.status(400).json({ message: "Email and password are required" });
-        return;
-      }
-
-      const user = await this.userService.loginUser(email, password);
-
-      if (user) {
-        res.status(200).json(user);
-      } else {
-        res.status(401).json({ message: "Invalid email or password" });
-      }
-    } catch (error) {
-      console.error("Error in login:", error);
-      res.status(500).json({ message: "Failed to login" });
-    }
-  }
+			if (response != null) {
+				res.status(200).json("USer Login successfully");
+			} else {
+				console.error("Data not found");
+				res.status(404).json("Error in Login USer");
+			}
+		} catch (error: any) {
+			console.error("Error in processing", error);
+			res.status(500).json("Error In Login USer");
+		}
+	}
 }
 
-
-
+export default UserController;

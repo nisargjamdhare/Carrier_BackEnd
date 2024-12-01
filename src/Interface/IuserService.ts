@@ -1,6 +1,7 @@
-import { IUser } from "../DTO/UserDto";
-
-export interface IUserService {
-  registerUser(user: IUser): Promise<IUser>;
-  loginUser(email: string, password: string): Promise<IUser | null>;
+import { ParameterDTO, loginDTO } from "../DTO/UserDto";
+interface IUserService {
+	registerUser(body: ParameterDTO): Promise<String>;
+	loginUser(body: loginDTO): Promise<string>;
 }
+
+export default IUserService;

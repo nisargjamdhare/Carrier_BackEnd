@@ -1,20 +1,20 @@
-import express from "express";
-import routes from "./Routes/index";
-import cors from "cors"; // Import cors
-
+import express = require("express");
+const cors = require("cors");
+import { Request, Response } from "express";
+import dbConnection from "./DBService/database";
+import { userRoutes } from "./utils/dependencies";
 const app = express();
 
-// Enable CORS
-app.use(cors({
-  origin: "http://localhost:3000", // Allow requests from your frontend URL
-  methods: "GET,POST,PUT,DELETE", // Specify allowed HTTP methods
-  allowedHeaders: "Content-Type,Authorization" // Specify allowed headers
-}));
-
-// Middleware to parse JSON
+app.use(cors());
 app.use(express.json());
+const port = process.env.PORT || 3000;
 
-// Load routes
-app.use("/User", routes);
+app.use("/User", userRoutes.getRouter());
+
+app.get("/health-check", (req: Request, res: Response) => {
+	res.send("API Running");
+});
+
+dbConnection();
 
 export default app;
