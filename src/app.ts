@@ -15,6 +15,8 @@ app.get("/health-check", (req: Request, res: Response) => {
 	res.send("API Running");
 });
 
-dbConnection();
+app.listen(port, () => {
+	console.log(`Server is running on http://localhost:${port}`);
+});
 
-export default app;
+dbConnection();

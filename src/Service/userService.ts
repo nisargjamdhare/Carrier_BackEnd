@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
 import IUserService from "../Interface/IuserService";
-import { ParameterDTO, loginDTO } from "../DTO/UserDto";
+import { ParameterDTO, loginDTO, UserResponse } from "../DTO/UserDto";
 import { User, UserData } from "../Entity/User";
 
 @injectable()
@@ -15,7 +15,7 @@ class UserService implements IUserService {
 			// Check if the email already exists
 			const existingData = await UserData.findOne({ email: body.email });
 			if (existingData) {
-				return "Error: User with this email already exists";
+				return " User with this email already exists";
 			}
 
 			// Create User instance and initialize it
@@ -44,7 +44,7 @@ class UserService implements IUserService {
 		}
 	}
 
-	async loginUser(body: loginDTO): Promise<string> {
+	async loginUser(body: loginDTO): Promise<UserResponse | string> {
 		try {
 			// Validate input
 			if (!body || !body.email || !body.password) {
@@ -62,8 +62,19 @@ class UserService implements IUserService {
 				return "Error: Incorrect password";
 			}
 
+			let userResponse: UserResponse = {
+				name: "",
+				email: "",
+			};
+			if (user) {
+				userResponse = {
+					name: user.userName,
+					email: user.email,
+				};
+			}
+
 			// Return success message
-			return `Login successful for user: ${user.userName}`;
+			return userResponse;
 		} catch (error) {
 			console.error("Error logging in user:", error);
 			return "Error logging in user";

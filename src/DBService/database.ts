@@ -4,6 +4,7 @@ dotenv.config();
 const CONNECTION_STRING = process.env.CONNECTION_STRING;
 
 function dbConnection() {
+	console.log("connection string : ", CONNECTION_STRING);
 	if (!CONNECTION_STRING) {
 		console.error("MongoDB URI is not defined in the environment variables.");
 		process.exit(1);

@@ -1,4 +1,38 @@
 "use strict";
+var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, decorators, contextIn, initializers, extraInitializers) {
+    function accept(f) { if (f !== void 0 && typeof f !== "function") throw new TypeError("Function expected"); return f; }
+    var kind = contextIn.kind, key = kind === "getter" ? "get" : kind === "setter" ? "set" : "value";
+    var target = !descriptorIn && ctor ? contextIn["static"] ? ctor : ctor.prototype : null;
+    var descriptor = descriptorIn || (target ? Object.getOwnPropertyDescriptor(target, contextIn.name) : {});
+    var _, done = false;
+    for (var i = decorators.length - 1; i >= 0; i--) {
+        var context = {};
+        for (var p in contextIn) context[p] = p === "access" ? {} : contextIn[p];
+        for (var p in contextIn.access) context.access[p] = contextIn.access[p];
+        context.addInitializer = function (f) { if (done) throw new TypeError("Cannot add initializers after decoration has completed"); extraInitializers.push(accept(f || null)); };
+        var result = (0, decorators[i])(kind === "accessor" ? { get: descriptor.get, set: descriptor.set } : descriptor[key], context);
+        if (kind === "accessor") {
+            if (result === void 0) continue;
+            if (result === null || typeof result !== "object") throw new TypeError("Object expected");
+            if (_ = accept(result.get)) descriptor.get = _;
+            if (_ = accept(result.set)) descriptor.set = _;
+            if (_ = accept(result.init)) initializers.unshift(_);
+        }
+        else if (_ = accept(result)) {
+            if (kind === "field") initializers.unshift(_);
+            else descriptor[key] = _;
+        }
+    }
+    if (target) Object.defineProperty(target, contextIn.name, descriptor);
+    done = true;
+};
+var __runInitializers = (this && this.__runInitializers) || function (thisArg, initializers, value) {
+    var useValue = arguments.length > 2;
+    for (var i = 0; i < initializers.length; i++) {
+        value = useValue ? initializers[i].call(thisArg, value) : initializers[i].call(thisArg);
+    }
+    return useValue ? value : void 0;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,58 +42,66 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __setFunctionName = (this && this.__setFunctionName) || function (f, name, prefix) {
+    if (typeof name === "symbol") name = name.description ? "[".concat(name.description, "]") : "";
+    return Object.defineProperty(f, "name", { configurable: true, value: prefix ? "".concat(prefix, " ", name) : name });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserController = void 0;
-const userService_1 = require("../Service/userService");
-class UserController {
-    constructor() {
-        this.userService = new userService_1.UserService();
-    }
-    register(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const { name, email, password } = req.body;
-                // Validate input
-                if (!name || !email || !password) {
-                    res.status(400).json({ message: "All fields are required" });
-                    return;
+const inversify_1 = require("inversify");
+let UserController = (() => {
+    let _classDecorators = [(0, inversify_1.injectable)()];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var UserController = _classThis = class {
+        constructor(userService) {
+            this.userService = userService;
+        }
+        register(req, res) {
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    const response = yield this.userService.registerUser(req.body);
+                    if (response != null) {
+                        res.status(200).json(response);
+                    }
+                    else {
+                        console.error("Data not found");
+                        res.status(404).json("Error in Registering USer");
+                    }
                 }
-                // Prepare user object
-                const user = { name, email, password };
-                // Call the service to register the user
-                const newUser = yield this.userService.registerUser(user);
-                res.status(201).json({
-                    message: "User registered successfully",
-                    user: newUser,
-                });
-            }
-            catch (error) {
-                console.error(error);
-            }
-        });
-    }
-    login(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const { email, password } = req.body;
-                // Validate input
-                if (!email || !password) {
-                    res.status(400).json({ message: "Email and password are required" });
-                    return;
+                catch (error) {
+                    console.error("Error in processing", error);
+                    res.status(500).json("Internal Server Error");
                 }
-                const user = yield this.userService.loginUser(email, password);
-                if (user) {
-                    res.status(200).json(user);
+            });
+        }
+        login(req, res) {
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    const response = yield this.userService.loginUser(req.body);
+                    if (response != null) {
+                        res.status(200).json(response);
+                    }
+                    else {
+                        console.error("Data not found");
+                        res.status(404).json("Error in Login USer");
+                    }
                 }
-                else {
-                    res.status(401).json({ message: "Invalid email or password" });
+                catch (error) {
+                    console.error("Error in processing", error);
+                    res.status(500).json("Error In Login USer");
                 }
-            }
-            catch (error) {
-                console.error("Error in login:", error);
-                res.status(500).json({ message: "Failed to login" });
-            }
-        });
-    }
-}
-exports.UserController = UserController;
+            });
+        }
+    };
+    __setFunctionName(_classThis, "UserController");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        UserController = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return UserController = _classThis;
+})();
+exports.default = UserController;

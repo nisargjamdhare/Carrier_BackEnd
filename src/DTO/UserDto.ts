@@ -10,4 +10,9 @@ interface loginDTO {
 	password: string;
 }
 
-export { loginDTO, ParameterDTO };
+interface UserResponse {
+	name: string;
+	email: string;
+}
+
+export { loginDTO, ParameterDTO, UserResponse };
