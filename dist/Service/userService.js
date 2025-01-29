@@ -46,9 +46,13 @@ var __setFunctionName = (this && this.__setFunctionName) || function (f, name, p
     if (typeof name === "symbol") name = name.description ? "[".concat(name.description, "]") : "";
     return Object.defineProperty(f, "name", { configurable: true, value: prefix ? "".concat(prefix, " ", name) : name });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const inversify_1 = require("inversify");
 const User_1 = require("../Entity/User");
+const axios_1 = __importDefault(require("axios"));
 let UserService = (() => {
     let _classDecorators = [(0, inversify_1.injectable)()];
     let _classDescriptor;
@@ -93,12 +97,10 @@ let UserService = (() => {
                     if (!body || !body.email || !body.password) {
                         return "Error: Email and password are required";
                     }
-                    // Check if the user exists in the database
                     const user = yield User_1.UserData.findOne({ email: body.email });
                     if (!user) {
                         return "Error: User does not exist";
                     }
-                    // Verify the password
                     if (user.userPassword !== body.password) {
                         return "Error: Incorrect password";
                     }
@@ -112,12 +114,40 @@ let UserService = (() => {
                             email: user.email,
                         };
                     }
-                    // Return success message
                     return userResponse;
                 }
                 catch (error) {
                     console.error("Error logging in user:", error);
                     return "Error logging in user";
+                }
+            });
+        }
+        modelResponse(modelRequest) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a;
+                try {
+                    const apiUrl = "https://carrier-model-api.onrender.com/chat";
+                    // Send the request to the model API
+                    const response = yield axios_1.default.post(apiUrl, modelRequest);
+                    // Extract the raw response data
+                    const modelData = response.data;
+                    // Debugging: Log the raw response
+                    console.log("Raw modelData.response:", modelData);
+                    // Extract only the valid JSON portion
+                    const validJson = (_a = modelData.data.match(/\{[\s\S]*?\}/)) === null || _a === void 0 ? void 0 : _a[0];
+                    if (!validJson) {
+                        throw new Error("Invalid JSON structure in response");
+                    }
+                    const parsedResponse = validJson;
+                    return parsedResponse;
+                }
+                catch (error) {
+                    console.error("Error in modelResponse:", error);
+                    // Return default values on error
+                    return {
+                        careerFields: [],
+                        improvementSuggestions: "Error connecting to the model API or parsing response",
+                    };
                 }
             });
         }

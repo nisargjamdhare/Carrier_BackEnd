@@ -11,10 +11,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 const port = process.env.PORT || 3000;
-app.use("/User", dependencies_1.userRoutes.getRouter());
-app.get("/health-check", (req, res) => {
+app.get("/", (req, res) => {
     res.send("API Running");
 });
+app.use("/User", dependencies_1.userRoutes.getRouter());
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });

@@ -93,6 +93,24 @@ let UserController = (() => {
                 }
             });
         }
+        modelResponse(req, res) {
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    const response = yield this.userService.modelResponse(req.body);
+                    if (response != null) {
+                        res.status(200).json(response);
+                    }
+                    else {
+                        console.error("Data not found");
+                        res.status(404).json("Error in Login USer");
+                    }
+                }
+                catch (error) {
+                    console.error("Error in processing", error);
+                    res.status(500).json("Error In Login USer");
+                }
+            });
+        }
     };
     __setFunctionName(_classThis, "UserController");
     (() => {
