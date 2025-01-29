@@ -14,5 +14,15 @@ interface UserResponse {
 	name: string;
 	email: string;
 }
+interface FormResponse {
+	question: string;
+	answer: string;
+  }
+  
+  interface ModelRequest{
+	formResponses: FormResponse[];
+	recording: string;
+  }
+		
 
-export { loginDTO, ParameterDTO, UserResponse };
+export { loginDTO, ParameterDTO, UserResponse, ModelRequest };
