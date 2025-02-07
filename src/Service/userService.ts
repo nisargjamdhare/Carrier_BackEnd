@@ -2,6 +2,7 @@ import { injectable } from "inversify";
 import IUserService from "../Interface/IuserService";
 import { ParameterDTO, loginDTO, UserResponse, ModelRequest } from "../DTO/UserDto";
 import { User, UserData } from "../Entity/User";
+import CareerModel from "../Entity/carriermodel";
 import axios from "axios";
 
 
@@ -83,35 +84,86 @@ class UserService implements IUserService {
 	async modelResponse(modelRequest: ModelRequest): Promise<{ careerFields: any[]; improvementSuggestions: string }> {
 		try {
 			const apiUrl = "https://carrier-model-api.onrender.com/chat";
-	
-			// Send the request to the model API
 			const response: any = await axios.post(apiUrl, modelRequest);
+			
+			let dataString = response.data.data;
+			let modelData;
 	
-			// Extract the raw response data
-			const modelData: any = response.data;
+			try {
+				if (typeof dataString === 'string') {
+					// Log the raw string for debugging
+					console.log('Raw data string:', dataString);
+					
+					// Try to find the proper JSON structure
+					const jsonMatch = dataString.match(/\{[\s\S]*\}/);
+					if (jsonMatch) {
+						dataString = jsonMatch[0];
+					}
 	
-			// Debugging: Log the raw response
-			console.log("Raw modelData.response:", modelData);
+					// Clean the string of any trailing or leading content
+					dataString = dataString.trim();
+					
+					// Remove any extra characters after the last closing brace
+					const lastBraceIndex = dataString.lastIndexOf('}');
+					if (lastBraceIndex !== -1) {
+						dataString = dataString.substring(0, lastBraceIndex + 1);
+					}
 	
-			// Extract only the valid JSON portion
-			const validJson = modelData.data.match(/\{[\s\S]*?\}/)?.[0];
-			if (!validJson) {
-				throw new Error("Invalid JSON structure in response");
+					// Log the cleaned string
+					console.log('Cleaned data string:', dataString);
+	
+					try {
+						modelData = JSON.parse(dataString);
+					} catch (parseError) {
+						console.error('First parse attempt failed:', parseError);
+						
+						// Try one more time with stricter cleaning
+						dataString = dataString.replace(/[\x00-\x1F\x7F-\x9F]/g, ''); // Remove control characters
+						dataString = dataString.replace(/\\n/g, ''); // Remove newline characters
+						dataString = dataString.replace(/\s+/g, ' '); // Normalize whitespace
+						
+						console.log('Further cleaned string:', dataString);
+						modelData = JSON.parse(dataString);
+					}
+				} else {
+					modelData = dataString;
+				}
+	
+				// Validate the structure
+				if (!modelData.careerFields || !Array.isArray(modelData.careerFields)) {
+					throw new Error('Invalid data structure: missing or invalid careerFields');
+				}
+	
+				const careerData = new CareerModel({
+					careerFields: modelData.careerFields,
+					improvementSuggestions: modelData.improvementSuggestions || ''
+				});
+	
+				await careerData.save();
+				console.log('Data saved successfully:', careerData);
+	
+				return modelData;
+	
+			} catch (parseError) {
+				console.error('Error parsing or validating data:', parseError);
+				console.error('Problematic data string:', dataString);
+				
+				// If we can see the structure of the error response, log it
+				if (response.data) {
+					console.log('Full response data:', JSON.stringify(response.data, null, 2));
+				}
+				
+				return {
+					careerFields: [],
+					improvementSuggestions: "Error parsing model response"
+				};
 			}
-	
-			
-			const parsedResponse = validJson;
-	
-		return  parsedResponse;
-			
 	
 		} catch (error) {
 			console.error("Error in modelResponse:", error);
-	
-			// Return default values on error
 			return {
 				careerFields: [],
-				improvementSuggestions: "Error connecting to the model API or parsing response",
+				improvementSuggestions: "Error connecting to the model API or processing response",
 			};
 		}
 	}
