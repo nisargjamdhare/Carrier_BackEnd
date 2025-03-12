@@ -23,6 +23,16 @@ interface FormResponse {
 	formResponses: FormResponse[];
 	recording: string;
   }
-		
 
-export { loginDTO, ParameterDTO, UserResponse, ModelRequest };
+  interface RequestDTO {
+
+	careerFields: [
+		{
+		  field: { type: String},
+		  reason: { type: String },
+		}
+	]
+  }
+
+
+export { loginDTO, ParameterDTO, UserResponse, ModelRequest, RequestDTO };
