@@ -180,291 +180,144 @@ class UserService implements IUserService {
 		try {
 			const college_data =[
 				{
-				  collegeName: "Hindu College",
+				  collegeName: "All India Institute of Medical Sciences (AIIMS), Delhi",
 				  collegeLocation: "Delhi",
-				  collegeFees: 80600,
+				  collegeFees: 0,
 				  Rank: 1,
-				  officialWebsite: "http://www.hinducollege.ac.in/"
+				  officialWebsite: "https://www.aiims.edu/"
 				},
 				{
-				  collegeName: "Miranda House",
-				  collegeLocation: "Delhi",
-				  collegeFees: 44670,
+				  collegeName: "Post Graduate Institute of Medical Education and Research (PGIMER), Chandigarh",
+				  collegeLocation: "Chandigarh",
+				  collegeFees: 0,
 				  Rank: 2,
-				  officialWebsite: "https://www.mirandahouse.ac.in/"
+				  officialWebsite: "https://pgimer.edu.in/"
 				},
 				{
-				  collegeName: "Lady Shri Ram College for Women",
-				  collegeLocation: "Delhi",
-				  collegeFees: 53670,
+				  collegeName: "Christian Medical College (CMC), Vellore",
+				  collegeLocation: "Tamil Nadu",
+				  collegeFees: 300000,
+				  Rank: 3,
+				  officialWebsite: "https://www.cmcvellore.ac.in/"
+				},
+				{
+				  collegeName: "National Institute of Mental Health & Neuro Sciences (NIMHANS), Bengaluru",
+				  collegeLocation: "Karnataka",
+				  collegeFees: 0,
 				  Rank: 4,
-				  officialWebsite: "https://lsr.edu.in/"
+				  officialWebsite: "https://nimhans.ac.in/"
 				},
 				{
-				  collegeName: "Kirori Mal College",
-				  collegeLocation: "Delhi",
-				  collegeFees: 38925,
+				  collegeName: "Jawaharlal Institute of Postgraduate Medical Education and Research (JIPMER), Puducherry",
+				  collegeLocation: "Puducherry",
+				  collegeFees: 0,
 				  Rank: 5,
-				  officialWebsite: "https://www.kmcollege.ac.in/"
+				  officialWebsite: "https://jipmer.edu.in/"
 				},
 				{
-				  collegeName: "Hansraj College",
-				  collegeLocation: "Delhi",
-				  collegeFees: 540,
+				  collegeName: "Sanjay Gandhi Postgraduate Institute of Medical Sciences (SGPGIMS), Lucknow",
+				  collegeLocation: "Uttar Pradesh",
+				  collegeFees: 0,
 				  Rank: 6,
-				  officialWebsite: "https://www.hansrajcollege.ac.in/"
+				  officialWebsite: "https://www.sgpgi.ac.in/"
 				},
 				{
-				  collegeName: "St. Xavier's College, Mumbai",
-				  collegeLocation: "Mumbai",
-				  collegeFees: 23361,
-				  Rank: null,
-				  officialWebsite: "https://xaviers.edu/"
+				  collegeName: "Banaras Hindu University (BHU), Varanasi",
+				  collegeLocation: "Uttar Pradesh",
+				  collegeFees: 0,
+				  Rank: 7,
+				  officialWebsite: "https://www.bhu.ac.in/"
 				},
 				{
-				  collegeName: "Loyola College",
-				  collegeLocation: "Chennai",
-				  collegeFees: 42570,
+				  collegeName: "Amrita Vishwa Vidyapeetham, Coimbatore",
+				  collegeLocation: "Tamil Nadu",
+				  collegeFees: 560000,
 				  Rank: 8,
-				  officialWebsite: "https://www.loyolacollege.edu/"
+				  officialWebsite: "https://www.amrita.edu/"
 				},
 				{
-				  collegeName: "Presidency College",
-				  collegeLocation: "Chennai",
-				  collegeFees: null,
-				  Rank: 13,
-				  officialWebsite: "https://www.presidency.edu/"
+				  collegeName: "Kasturba Medical College (KMC), Manipal",
+				  collegeLocation: "Karnataka",
+				  collegeFees: 560000,
+				  Rank: 9,
+				  officialWebsite: "https://manipal.edu/kmc-manipal.html"
 				},
 				{
-				  collegeName: "Madras Christian College",
-				  collegeLocation: "Chennai",
-				  collegeFees: 56157,
-				  Rank: 5,
-				  officialWebsite: "https://www.mcc.edu.in/"
+				  collegeName: "Madras Medical College & Government General Hospital, Chennai",
+				  collegeLocation: "Tamil Nadu",
+				  collegeFees: 0,
+				  Rank: 10,
+				  officialWebsite: "https://www.mmc.ac.in/"
 				},
 				{
-				  collegeName: "Jawaharlal Nehru University",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
-				  Rank: null,
-				  officialWebsite: "https://www.jnu.ac.in/"
-				},
-				{
-				  collegeName: "Christ University",
-				  collegeLocation: "Bengaluru",
-				  collegeFees: 150000,
-				  Rank: null,
-				  officialWebsite: "https://christuniversity.in/"
-				},
-				{
-				  collegeName: "Symbiosis College of Arts and Commerce",
+				  collegeName: "Armed Forces Medical College (AFMC), Pune",
 				  collegeLocation: "Pune",
-				  collegeFees: 50000,
+				  collegeFees: 72690,
 				  Rank: null,
-				  officialWebsite: "https://symbiosiscollege.edu.in/"
+				  officialWebsite: "https://afmc.nic.in/"
 				},
 				{
-				  collegeName: "Fergusson College",
+				  collegeName: "Grant Medical College, Mumbai",
+				  collegeLocation: "Mumbai",
+				  collegeFees: 138300,
+				  Rank: null,
+				  officialWebsite: "https://www.gmcjjh.org/"
+				},
+				{
+				  collegeName: "Seth Gordhandas Sunderdas Medical College, Mumbai",
+				  collegeLocation: "Mumbai",
+				  collegeFees: 138300,
+				  Rank: null,
+				  officialWebsite: "https://www.kem.edu/"
+				},
+				{
+				  collegeName: "BJ Government Medical College, Pune",
 				  collegeLocation: "Pune",
-				  collegeFees: 10000,
+				  collegeFees: 138300,
 				  Rank: null,
-				  officialWebsite: "https://www.fergusson.edu/"
+				  officialWebsite: "https://www.bjmcpune.org/"
 				},
 				{
-				  collegeName: "St. Joseph's College of Commerce",
-				  collegeLocation: "Bengaluru",
-				  collegeFees: 30000,
+				  collegeName: "Indira Gandhi Government Medical College, Nagpur",
+				  collegeLocation: "Nagpur",
+				  collegeFees: 138300,
 				  Rank: null,
-				  officialWebsite: "https://sjcc.edu.in/"
+				  officialWebsite: "https://www.igmcnagpur.org/"
 				},
 				{
-				  collegeName: "Mount Carmel College",
-				  collegeLocation: "Bengaluru",
-				  collegeFees: 40000,
+				  collegeName: "Rajiv Gandhi Medical College, Thane",
+				  collegeLocation: "Thane",
+				  collegeFees: 138300,
 				  Rank: null,
-				  officialWebsite: "https://www.mountcarmelcollege.in/"
+				  officialWebsite: "https://www.rgmc-thane.com/"
 				},
 				{
-				  collegeName: "Jesus and Mary College",
-				  collegeLocation: "Delhi",
-				  collegeFees: 50000,
+				  collegeName: "Government Medical College, Aurangabad",
+				  collegeLocation: "Aurangabad",
+				  collegeFees: 138300,
 				  Rank: null,
-				  officialWebsite: "https://www.jmc.ac.in/"
+				  officialWebsite: "https://www.gmcaurangabad.com/"
 				},
 				{
-				  collegeName: "Maitreyi College",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
+				  collegeName: "Government Medical College, Latur",
+				  collegeLocation: "Latur",
+				  collegeFees: 138300,
 				  Rank: null,
-				  officialWebsite: "https://maitreyi.ac.in/"
+				  officialWebsite: "https://www.gmclatur.org/"
 				},
 				{
-				  collegeName: "Daulat Ram College",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
+				  collegeName: "Government Medical College, Miraj",
+				  collegeLocation: "Miraj",
+				  collegeFees: 138300,
 				  Rank: null,
-				  officialWebsite: "https://www.daulatramcollege.edu.in/"
+				  officialWebsite: "https://www.gmc-miraj.com/"
 				},
 				{
-				  collegeName: "Gargi College",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
+				  collegeName: "Government Medical College, Akola",
+				  collegeLocation: "Akola",
+				  collegeFees: 138300,
 				  Rank: null,
-				  officialWebsite: "https://www.gargicollege.in/"
-				},
-				{
-				  collegeName: "Indraprastha College for Women",
-				  collegeLocation: "Delhi",
-				  collegeFees: 540,
-				  Rank: null,
-				  officialWebsite: "https://ipcollege.ac.in/"
-				},
-				{
-				  collegeName: "Kamala Nehru College",
-				  collegeLocation: "Delhi",
-				  collegeFees: 1080,
-				  Rank: null,
-				  officialWebsite: "https://www.knc.edu.in/"
-				},
-				{
-				  collegeName: "Lady Irwin College",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
-				  Rank: null,
-				  officialWebsite: "https://www.ladyirwin.edu.in/"
-				},
-				{
-				  collegeName: "Maharaja Agrasen College",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
-				  Rank: null,
-				  officialWebsite: "https://mac.du.ac.in/"
-				},
-				{
-				  collegeName: "Motilal Nehru College",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
-				  Rank: null,
-				  officialWebsite: "https://www.mlncdu.ac.in/"
-				},
-				{
-				  collegeName: "Ramjas College",
-				  collegeLocation: "Delhi",
-				  collegeFees: 44720,
-				  Rank: null,
-				  officialWebsite: "https://www.ramjascollege.edu/"
-				},
-				{
-				  collegeName: "Ramanujan College",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
-				  Rank: null,
-				  officialWebsite: "https://ramanujancollege.ac.in/"
-				},
-				{
-				  collegeName: "Satyawati College",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
-				  Rank: null,
-				  officialWebsite: "https://satyawati.du.ac.in/"
-				},
-				{
-				  collegeName: "Shaheed Bhagat Singh College",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
-				  Rank: null,
-				  officialWebsite: "https://www.sbsec.org/"
-				},
-				{
-				  collegeName: "Shivaji College",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
-				  Rank: null,
-				  officialWebsite: "https://shivajicollege.ac.in/"
-				},
-				{
-				  collegeName: "Sri Aurobindo College",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
-				  Rank: null,
-				  officialWebsite: "https://www.aurobindo.du.ac.in/"
-				},
-				{
-				  collegeName: "Sri Venkateswara College",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
-				  Rank: null,
-				  officialWebsite: "https://www.svc.ac.in/"
-				},
-				{
-				  collegeName: "Vivekananda College",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
-				  Rank: null,
-				  officialWebsite: "https://www.vivekanandacollege.edu.in/"
-				},
-				{
-				  collegeName: "Zakir Husain Delhi College",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
-				  Rank: null,
-				  officialWebsite: "https://www.zakirhusaindelhicollege.in/"
-				},
-				{
-				  collegeName: "Bharati College",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
-				  Rank: null,
-				  officialWebsite: "https://bharaticollege.du.ac.in/"
-				},
-				{
-				  collegeName: "College of Art",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
-				  Rank: null,
-				  officialWebsite: "https://www.collegeofart.com/"
-				},
-				{
-				  collegeName: "Delhi College of Arts and Commerce",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
-				  Rank: null,
-				  officialWebsite: "https://www.dcac.du.ac.in/"
-				},
-				{
-				  collegeName: "Kalindi College",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
-				  Rank: null,
-				  officialWebsite: "https://www.kalindi.du.ac.in/"
-				},
-				{
-				  collegeName: "PGDAV College",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
-				  Rank: null,
-				  officialWebsite: "https://pgdav.du.ac.in/"
-				},
-				{
-				  collegeName: "Rajdhani College",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
-				  Rank: null,
-				  officialWebsite: "https://www.rajdhani.du.ac.in/"
-				},
-				{
-				  collegeName: "Sri Guru Gobind Singh College of Commerce",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
-				  Rank: null,
-				  officialWebsite: "https://www.sggsc.ac.in/"
-				},
-				{
-				  collegeName: "Sri Guru Nanak Dev Khalsa College",
-				  collegeLocation: "Delhi",
-				  collegeFees: null,
-				  Rank: null,
-				  officialWebsite: "https://www.sgndkc.du.ac.in/"
+				  officialWebsite: "https://www.gmca-kola.org/"
 				}
 			  ];
 			const colleges = college_data.map((entry) => ({
@@ -473,7 +326,7 @@ class UserService implements IUserService {
 				collegeFees: isNaN(Number(entry["collegeFees"])) ? null : Number(entry["collegeFees"]),
 				Rank: entry["Rank"] ? Number(entry["Rank"]) : null,
 				officialWebsite: entry["officialWebsite"] || null,
-				collegeType: "Arts & Humanities",
+				collegeType: "Medical",
 			}));
 	
 			await CollegeModel.insertMany(colleges);
@@ -516,15 +369,55 @@ class UserService implements IUserService {
 					"Journalist or News Reporter", "Public Relations Specialist", "Content Writer or Editor", "Social Worker or Counselor"
 				],
 				"Medical": [
-					"Doctor", "Nursing", "Pharmacy", "Dentistry", "Physiotherapy", "Radiology & Medical Imaging",
-					"Veterinary Science", "Biomedical Science & Biotechnology", "Public Health Administration", "Healthcare Management",
-					"Nutrition & Dietetics", "Psychology & Mental Health Counseling", "Occupational Therapy", "Genetic Counseling",
-					"Paramedical Sciences (Lab Technician, EMT, etc.)", "Medical Equipment & Device Engineering",
-					"Forensic Science & Pathology", "Epidemiology", "Health Informatics", "Medical Research Scientist",
-					"Actuarial Science (as it deals with risk assessment in medical insurance)",
-					"Statistician (for medical research and data analysis)", "Research Scientist (for medical and life sciences)",
-					"Operations Research Analyst (for hospital and healthcare management)"
-				],
+    "Doctor",
+    "Nursing",
+    "Pharmacy",
+    "Dentistry",
+    "Physiotherapy",
+    "Radiology & Medical Imaging",
+    "Veterinary Science",
+    "Biomedical Science & Biotechnology",
+    "Public Health Administration",
+    "Healthcare Management",
+    "Nutrition & Dietetics",
+    "Psychology & Mental Health Counseling",
+    "Occupational Therapy",
+    "Genetic Counseling",
+    "Paramedical Sciences (Lab Technician, EMT, etc.)",
+    "Medical Equipment & Device Engineering",
+    "Forensic Science & Pathology",
+    "Epidemiology",
+    "Health Informatics",
+	"Patient Care Technician",
+	"Healthcare Support Occupations",
+    "Medical Research Scientist",
+    "Actuarial Science (as it deals with risk assessment in medical insurance)",
+    "Statistician (for medical research and data analysis)",
+    "Research Scientist (for medical and life sciences)",
+    "Operations Research Analyst (for hospital and healthcare management)",
+    
+    // Expanded fields from the search results
+    "Anesthesiology (Anesthesiologist, Nurse Anesthetist)",
+    "Cardiology (Cardiologist, Cardiovascular Technologist)",
+    "Critical Care Medicine (Intensivist, Critical Care Nurse)",
+    "Dermatology (Dermatologist)",
+    "Emergency Medicine (Emergency Physician, EMT)",
+    "Endocrinology (Endocrinologist)",
+    "Gastroenterology (Gastroenterologist)",
+    "Genetics (Genetic Counselor)",
+    "Geriatrics (Geriatrician)",
+    "Hematology (Hematologist, Medical Laboratory Technician)",
+    "Nephrology (Nephrologist, Dialysis Technician)",
+    "Neurology (Neurologist, Neuropsychologist)",
+    "Oncology (Oncologist, Radiation Therapist)",
+    "Ophthalmology (Ophthalmologist, Optometrist)",
+    "Orthopedics (Orthopedic Physician, Physical Therapist)",
+    "Pediatrics (Pediatrician, Neonatal Nurse Practitioner)",
+    "Psychiatry (Psychiatrist, Psychiatric Nurse Practitioner)",
+    "Pulmonology (Pulmonologist, Respiratory Therapist)",
+    "Reproductive Medicine (Obstetrician, Gynecologist)",
+    "Surgery (General Surgeon, Neurosurgeon)"
+],
 				"Business": [
 					"Finance", "Marketing", "Entrepreneurship", "Product Management", "Marketing & Advertising",
 					"Project Management", "Business Analyst", "Accounting & Auditing", "Investment Banking",
